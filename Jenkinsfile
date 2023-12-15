@@ -35,7 +35,7 @@ pipeline {
                 branch 'main'
             }
             steps {
-                sh "sed -i 's/opensourceteam6:${env.BUILD_NUMBER}/opensourceteam6:latest/g' dep.yml"
+                sh "sed -i 's/opensourceteam6:latest/opensourceteam6:${env.BUILD_NUMBER}/g' dep.yml"
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, 
                 clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'dep.yml', credentialsId: env.CREDENTIALS_ID,
                 verifyDeployments: true])
